@@ -2,8 +2,8 @@ use JSON::Fast;
 use LibCurl::Easy;
 use URI::Template;
 use YAML;
-use APS::Software;
-use APS::File;
+use APSComplete::Software;
+use APSComplete::File;
 
 my $runuri = URI::Template.new(template => 'run/{runid}{?project,state}');
 

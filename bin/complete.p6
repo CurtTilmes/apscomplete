@@ -1,6 +1,6 @@
 #!/usr/bin/env perl6
 
-use APS::Job;
+use APSComplete::Job;
 
 proto MAIN(|)
 {

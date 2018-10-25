@@ -1,0 +1,19 @@
+{
+    "name": "apscomplete",
+    "version": "0.1",
+    "source-url": "https://github.com/CurtTilmes/apscomplete.git",
+    "perl": "6.*",
+    "depends": [
+        "YAML", "URI::Template", "LibCurl"
+    ],
+    "test-depends" : [ "Test::When", "Test::META" ],
+    "license": "NASA-1.3",
+    "provides": {
+        "APSComplete::File":         "lib/APSComplete/File.pm6",
+        "APSComplete::Software":     "lib/APSComplete/Software.pm6",
+        "APSComplete::Job":          "lib/APSComplete/Job.pm6"
+    },
+    "meta-version": "0",
+    "authors" : [ "Curt Tilmes <Curt.Tilmes@nasa.gov>" ],
+    "description": "Updates run completion in Origin"
+}
