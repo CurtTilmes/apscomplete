@@ -6,7 +6,6 @@
     "depends": [
         "YAML", "URI::Template", "LibCurl"
     ],
-    "test-depends" : [ "Test::When", "Test::META" ],
     "license": "NASA-1.3",
     "provides": {
         "APSComplete::File":         "lib/APSComplete/File.pm6",
