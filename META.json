@@ -1,0 +1,18 @@
+{
+    "name": "apscomplete",
+    "source-url": "https://github.com/CurtTilmes/apscomplete.git",
+    "perl": "6.*",
+    "depends": [
+        "YAML", "URI::Template", "LibCurl"
+    ],
+    "license": "NASA-1.3",
+    "provides": {
+        "APS::File":         "lib/APS/File.pm6",
+        "APS::Software":     "lib/APS/Software.pm6",
+        "APS::Job":          "lib/APS/Job.pm6"
+    },
+    "version": "0.0.1",
+    "meta-version": "0",
+    "authors" : [ "Curt Tilmes <Curt.Tilmes@nasa.gov>" ],
+    "description": "Write me!"
+}
