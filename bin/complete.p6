@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 
-use APSComplete::Job;
+use APS::Job;
+use APS::Complete;
 
 proto MAIN(|)
 {
@@ -15,16 +16,20 @@ proto MAIN(|)
 
 multi MAIN('success', Str:D $runid)
 {
-    my $job = Job.new(:$runid);
+    my $job = read-input-job($runid);
 
-    $job.archive-outputs;
+    $job.read-output;
 
-    $job.origin-update-run(OK);
+    $job.outputs.archive("$*APSROOT/$job.project()/data");
+
+    "$*APSDIR/$job.runid().output".IO.spurt: ~$job;
+
+    origin-run-complete($job, OK)
 }
 
 multi MAIN('fail', Str:D $runid)
 {
-    my $job = Job.new(:$runid);
+    my $job = read-input-job($runid);
 
-    $job.origin-update-run(FAIL);
+    origin-run-complete($job, FAIL)
 }
