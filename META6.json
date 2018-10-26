@@ -4,7 +4,7 @@
     "source-url": "https://github.com/CurtTilmes/apscomplete.git",
     "perl": "6.*",
     "depends": [
-        "URI::Template", "LibCurl", "APS::Parser"
+        "URI::Template", "LibCurl", "APS::Job"
     ],
     "license": "NASA-1.3",
     "provides": {
