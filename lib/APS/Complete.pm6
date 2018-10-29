@@ -13,7 +13,7 @@ sub origin-run-complete($job, JobState $state) is export
         my %body;
         %body<software> = .software.hashlist if .software;
         %body<inputs>   = .inputs.hashlist if .inputs;
-        %body<outputs>  = .outputs.hashlist if .outputs;
+        %body<outputs>  = .outputs.hashlist if .outputs && $state ~~ OK;
 
         LibCurl::Easy.new(URL => "http://$*host:$*port/" ~
                           $runuri.process(runid => .runid,
@@ -23,5 +23,23 @@ sub origin-run-complete($job, JobState $state) is export
                           send => to-json(%body),
                           customrequest => 'POST',
                           :failonerror).perform
+    }
+}
+
+sub archive($job, IO::Path:D $destdir) is export
+{
+    die "Missing archive dir $destdir" unless $destdir.d;
+
+    for $job.outputs.files
+    {
+        with $destdir.add(.file.basename)
+        {
+            die "$_ already exists" if .f
+        }
+    }
+
+    for $job.outputs.files
+    {
+        .file.copy: $destdir.add: .file.basename
     }
 }

@@ -20,20 +20,15 @@ multi MAIN('success', Str:D $runid)
 
     $job.read-output;
 
-    my $archdir = "$*APSROOT/$job.project()/data".IO;
+    try archive($job, "$*APSROOT/$job.project()/data".IO);
 
-    exit note "Missing archive dir $archdir" unless $archdir.d;
+    .message.say with $!;
 
-    for $job.outputs.file
-    {
-        my $dest = $archdir.add(.basename);
-        exit note "$dest already exists!" if $dest.f;
-        .file.copy($dest)
-    }
+    my $state = $! ?? FAIL !! OK;
 
     "$*APSDIR/$job.runid().output".IO.spurt: ~$job;
 
-    origin-run-complete($job, OK)
+    origin-run-complete($job, $state);
 }
 
 multi MAIN('fail', Str:D $runid)
