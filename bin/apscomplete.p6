@@ -5,8 +5,8 @@ use APS::Complete;
 
 proto MAIN(|)
 {
-    my $*APSROOT = '/tis';
-    my $*APSDIR = "$*APSROOT/aps";
+    my $*APSROOT = '/aps';
+    my $*APSDIR = "$*APSROOT/jobs";
 
     my $*host = %*ENV<ORIGINHOST> // 'origin';
     my $*port = %*ENV<ORIGINPORT> // 3000;

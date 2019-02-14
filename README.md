@@ -14,11 +14,11 @@ or
 apscomplete.p6 fail d80700fb-032e-427b-99cf-87a0cc551d6c
 ```
 
-Reads the job description from `/tis/aps/<runid>.input`.
+Reads the job description from `/aps/jobs/<runid>.input`.
 
 If `success`:
 
-Copy each file in the current directory to `/tis/<project>/data`.
+Copy each file in the current directory to `/aps/<project>/data`.
 
 Look for the file `output` in the current directory.  It is a YAML format
 file describing the files in the current directory.
@@ -44,7 +44,7 @@ myfile.hdf:
 The run will then be updated in *Origin*.
 
 All files in the current directory will be listed as output files for
-the `run`.  If the are listed properly in the `output` file, it will
+the `run`.  If they are listed properly in the `output` file, it will
 also create `granule`s for them.
 
 If there are any problems archiving the files in the current

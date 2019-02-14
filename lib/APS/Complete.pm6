@@ -6,6 +6,7 @@ my $runuri = URI::Template.new(template => 'run/{runid}{?project,state}');
 
 enum JobState <NEW OK FAIL>;
 
+# Upload run to Origin, noting OK or FAIL
 sub origin-run-complete($job, JobState $state) is export
 {
     with $job
@@ -26,6 +27,7 @@ sub origin-run-complete($job, JobState $state) is export
     }
 }
 
+# Copy all output files from $job to $destdir
 sub archive($job, IO::Path:D $destdir) is export
 {
     die "Missing archive dir $destdir" unless $destdir.d;
