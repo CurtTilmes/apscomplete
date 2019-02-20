@@ -16,10 +16,13 @@ sub origin-run-complete($job, JobState $state) is export
         %body<inputs>   = .inputs.hashlist if .inputs;
         %body<outputs>  = .outputs.hashlist if .outputs && $state ~~ OK;
 
-        LibCurl::Easy.new(URL => "http://$*host:$*port/" ~
-                          $runuri.process(runid => .runid,
-                                          project => .project,
-                                          :$state),
+        my $URL = "http://$*host:$*port/" ~ $runuri.process(runid => .runid,
+                                                            project => .project,
+                                                            :$state);
+
+        put "Complete Job - [$URL]";
+
+        LibCurl::Easy.new(:$URL,
                           Content-Type => 'application/json',
                           send => to-json(%body),
                           customrequest => 'POST',
@@ -32,6 +35,8 @@ sub archive($job, IO::Path:D $destdir) is export
 {
     die "Missing archive dir $destdir" unless $destdir.d;
 
+    put "Archive to $destdir";
+
     for $job.outputs.files
     {
         with $destdir.add(.file.basename)
@@ -42,6 +47,7 @@ sub archive($job, IO::Path:D $destdir) is export
 
     for $job.outputs.files
     {
+        put "Archive $_.file.basename()";
         .file.copy: $destdir.add: .file.basename
     }
 }

@@ -9,7 +9,7 @@ proto MAIN(|)
     my $*APSDIR = "$*APSROOT/jobs";
 
     my $*host = %*ENV<ORIGINHOST> // 'origin';
-    my $*port = %*ENV<ORIGINPORT> // 3000;
+    my $*port = %*ENV<ORIGINPORT> // 10000;
 
     {*}
 }
